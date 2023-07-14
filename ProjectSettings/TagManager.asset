@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Coin
   - Obstacle
+  - SpeedBoost
+  - Runner
+  - BumperObs
+  - Magnet
+  - FinishText
+  - CheckPoint
   layers:
   - Default
   - TransparentFX
@@ -13,7 +19,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Runner
   - 
   - 
   - 

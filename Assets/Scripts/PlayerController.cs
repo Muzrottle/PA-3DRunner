@@ -8,11 +8,13 @@ public class PlayerController : MonoBehaviour
     public float xSpeed;
     public float limitX;
 
-    void Start()
-    {
-        
-    }
+    public GameObject carBody;
+    public GameObject driver;
 
+    // Added new codes
+    public Animator driverAnim;
+    public Animator carAnim;
+    public GameObject player;
     
     void Update()
     {
@@ -34,10 +36,31 @@ public class PlayerController : MonoBehaviour
             touchXDelta = Input.GetAxis("Mouse X");
         }
 
-        newX = transform.position.x + xSpeed * touchXDelta * Time.deltaTime;
+        newX = player.transform.position.x + xSpeed * touchXDelta * Time.deltaTime;
         newX = Mathf.Clamp(newX, -limitX, limitX);
 
-        Vector3 newPosition = new Vector3(newX, transform.position.y, transform.position.z + runningSpeed * Time.deltaTime);
-        transform.position = newPosition;
+        Vector3 newPosition = new Vector3(newX, player.transform.position.y, player.transform.position.z + runningSpeed * Time.deltaTime);
+        player.transform.position = newPosition;
+    }
+
+    public void FinishAnimation(bool WinState)
+    {
+        if (WinState) 
+        {
+            carAnim.enabled = true;
+        }
+        else
+        {
+            driverAnim.enabled = true;
+        }
+
+        driverAnim.SetBool("didWin", WinState);
+    }
+
+    //If you finished first this function will be called at the end of the car animation.
+    public void winEntry()
+    {
+        carAnim.enabled = false;
+        driverAnim.enabled = true;
     }
 }
